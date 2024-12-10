@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connections</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="text-center my-4">
+            <h1>Connections</h1>
+            <p class="date">December 10, 2024</p>
+        </header>
+
+        <div class="game-container">
+            <div id="matched-groups" class="matched-groups"></div>
+            
+            <div id="game-grid" class="game-grid">
+                <!-- Grid will be populated by JavaScript -->
+            </div>
+
+            <div class="mistakes-counter">
+                Mistakes Remaining: 
+                <span class="mistake-dots">
+                    <span class="dot active"></span>
+                    <span class="dot active"></span>
+                    <span class="dot active"></span>
+                    <span class="dot active"></span>
+                </span>
+            </div>
+
+            <div class="controls">
+                <button id="shuffle" class="btn btn-outline-secondary">Shuffle</button>
+                <button id="deselect-all" class="btn btn-outline-secondary">Deselect All</button>
+                <button id="submit" class="btn btn-dark" disabled>Submit</button>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/game.js"></script>
+</body>
+</html>
