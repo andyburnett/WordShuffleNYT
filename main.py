@@ -11,8 +11,8 @@ app.config['SECRET_KEY'] = os.urandom(24)
 # Initialize SQLAlchemy
 db = SQLAlchemy(app)
 
-# Import routes after app initialization
-import routes
+# Import routes after app and db are initialized
+from routes import *
 
 if __name__ == '__main__':
     with app.app_context():
