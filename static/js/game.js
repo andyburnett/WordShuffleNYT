@@ -27,12 +27,17 @@ class ConnectionsGame {
     async startNewGame() {
         try {
             const response = await fetch('/api/new-game');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
             const data = await response.json();
             this.words = data.words;
-            this.shuffle();
+            this.groups = data.groups;
+            console.log('Loaded game data:', { words: this.words, groups: this.groups });
             this.renderGrid();
         } catch (error) {
             console.error('Failed to start new game:', error);
+            this.grid.innerHTML = '<div class="error">Failed to load game data. Please refresh the page.</div>';
         }
     }
 
@@ -85,7 +90,7 @@ class ConnectionsGame {
 
     validateSelection() {
         const selectedWordsArray = Array.from(this.selectedWords);
-        return this.INITIAL_GROUPS.find(group => 
+        return this.groups.find(group => 
             group.words.every(word => selectedWordsArray.includes(word))
         );
     }

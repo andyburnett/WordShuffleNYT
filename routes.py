@@ -47,6 +47,16 @@ def validate_guess():
 
 @app.route('/api/new-game')
 def new_game():
-    all_words = [word for group in INITIAL_GROUPS for word in group['words']]
+    # Flatten the words from all groups
+    all_words = []
+    for group in INITIAL_GROUPS:
+        all_words.extend(group['words'])
+    
+    # Shuffle the words
     random.shuffle(all_words)
-    return jsonify({'words': all_words})
+    
+    # Create a new game state
+    return jsonify({
+        'words': all_words,
+        'groups': INITIAL_GROUPS
+    })
