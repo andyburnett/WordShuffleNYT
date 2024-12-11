@@ -2,8 +2,8 @@ class ConnectionsGame {
     constructor() {
         this.INITIAL_GROUPS = [
             {
-                "words": ["WORD1", "WORD2", "WORD3", "WORD4"],
-                "description": "Your descriptive sentence explaining the connection",
+                "words": ["Iceland", "Duo", "FIRST", "Squash"],
+                "description": "Who would have thought that Duo Lingo is as addictive as crack",
                 "color": "#85C0F9"
             },
             {
