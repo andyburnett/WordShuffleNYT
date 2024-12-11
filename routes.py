@@ -5,23 +5,23 @@ import random
 
 INITIAL_GROUPS = [
     {
-        "name": "TEST GROUP 1",
-        "words": ["FISH", "INLAND", "TOUCHDOWN", "NAME"],
+        "words": ["WORD1", "WORD2", "WORD3", "WORD4"],
+        "description": "Your descriptive sentence explaining the connection",
         "color": "#85C0F9"
     },
     {
-        "name": "TEST GROUP 2",
-        "words": ["CALL", "CRUISE", "DUB", "RUMMAGE"],
+        "words": ["WORD5", "WORD6", "WORD7", "WORD8"],
+        "description": "Another descriptive sentence for this group",
         "color": "#A6CF98"
     },
     {
-        "name": "TEST GROUP 3",
-        "words": ["WANDA", "FUMBLE", "OLIVIA", "TAKEOFF"],
+        "words": ["WORD9", "WORD10", "WORD11", "WORD12"],
+        "description": "Description for the third group",
         "color": "#F9DF6D"
     },
     {
-        "name": "TEST GROUP 4",
-        "words": ["RAN", "TAXI", "ROOT", "LABEL"],
+        "words": ["WORD13", "WORD14", "WORD15", "WORD16"],
+        "description": "Description for the fourth group",
         "color": "#FF8B94"
     }
 ]
