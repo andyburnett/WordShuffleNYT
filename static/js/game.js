@@ -1,5 +1,28 @@
 class ConnectionsGame {
     constructor() {
+        this.INITIAL_GROUPS = [
+            {
+                "words": ["FISH", "INLAND", "TOUCHDOWN", "NAME"],
+                "description": "Movement related words",
+                "color": "#85C0F9"
+            },
+            {
+                "words": ["CALL", "CRUISE", "DUB", "RUMMAGE"],
+                "description": "Search or explore",
+                "color": "#A6CF98"
+            },
+            {
+                "words": ["WANDA", "FUMBLE", "OLIVIA", "TAKEOFF"],
+                "description": "Names and actions",
+                "color": "#F9DF6D"
+            },
+            {
+                "words": ["RAN", "TAXI", "ROOT", "LABEL"],
+                "description": "Words with multiple meanings",
+                "color": "#FF8B94"
+            }
+        ];
+        
         this.selectedWords = new Set();
         this.matchedGroups = new Set();
         this.mistakes = 0;
@@ -7,7 +30,7 @@ class ConnectionsGame {
         
         this.initializeElements();
         this.initializeEventListeners();
-        this.startNewGame().catch(console.error);
+        this.startNewGame();
     }
 
     initializeElements() {
@@ -24,21 +47,11 @@ class ConnectionsGame {
         this.shuffleBtn.addEventListener('click', () => this.shuffle());
     }
 
-    async startNewGame() {
-        try {
-            const response = await fetch('/api/new-game');
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const data = await response.json();
-            this.words = data.words;
-            this.groups = data.groups;
-            console.log('Loaded game data:', { words: this.words, groups: this.groups });
-            this.renderGrid();
-        } catch (error) {
-            console.error('Failed to start new game:', error);
-            this.grid.innerHTML = '<div class="error">Failed to load game data. Please refresh the page.</div>';
-        }
+    startNewGame() {
+        // Get all words from all groups and flatten them into a single array
+        this.words = this.INITIAL_GROUPS.flatMap(group => group.words);
+        this.shuffle();
+        this.renderGrid();
     }
 
     renderGrid() {
@@ -90,7 +103,7 @@ class ConnectionsGame {
 
     validateSelection() {
         const selectedWordsArray = Array.from(this.selectedWords);
-        return this.groups.find(group => 
+        return this.INITIAL_GROUPS.find(group => 
             group.words.every(word => selectedWordsArray.includes(word))
         );
     }
