@@ -2,23 +2,23 @@ class ConnectionsGame {
     constructor() {
         this.INITIAL_GROUPS = [
             {
-                "name": "TEST GROUP 1",
                 "words": ["FISH", "INLAND", "TOUCHDOWN", "NAME"],
+                "description": "Words that can be followed by WATER",
                 "color": "#85C0F9"
             },
             {
-                "name": "TEST GROUP 2",
                 "words": ["CALL", "CRUISE", "DUB", "RUMMAGE"],
+                "description": "Words that can precede SALE",
                 "color": "#A6CF98"
             },
             {
-                "name": "TEST GROUP 3",
                 "words": ["WANDA", "FUMBLE", "OLIVIA", "TAKEOFF"],
+                "description": "Words related to air travel",
                 "color": "#F9DF6D"
             },
             {
-                "name": "TEST GROUP 4",
                 "words": ["RAN", "TAXI", "ROOT", "LABEL"],
+                "description": "Words that can be both nouns and verbs",
                 "color": "#FF8B94"
             }
         ];
@@ -124,7 +124,7 @@ class ConnectionsGame {
         groupElement.style.backgroundColor = matchedGroup.color;
         groupElement.innerHTML = `
             <div>${Array.from(this.selectedWords).join(' • ')}</div>
-            <div class="group-name">${matchedGroup.name}</div>
+            <div class="group-name">${matchedGroup.description}</div>
         `;
         this.matchedGroupsContainer.appendChild(groupElement);
 
