@@ -1,5 +1,28 @@
 class ConnectionsGame {
     constructor() {
+        this.INITIAL_GROUPS = [
+            {
+                "words": ["Iceland", "Duo", "FIRST", "Squash"],
+                "description": "Who would have thought that Duo Lingo is as addictive as crack",
+                "color": "#85C0F9"
+            },
+            {
+                "words": ["WORD5", "WORD6", "WORD7", "WORD8"],
+                "description": "Another descriptive sentence for this group",
+                "color": "#A6CF98"
+            },
+            {
+                "words": ["WORD9", "WORD10", "WORD11", "WORD12"],
+                "description": "Description for the third group",
+                "color": "#F9DF6D"
+            },
+            {
+                "words": ["WORD13", "WORD14", "WORD15", "WORD16"],
+                "description": "Description for the fourth group",
+                "color": "#FF8B94"
+            }
+        ];
+
         this.selectedWords = new Set();
         this.matchedGroups = new Set();
         this.mistakes = 0;
@@ -24,10 +47,9 @@ class ConnectionsGame {
         this.shuffleBtn.addEventListener('click', () => this.shuffle());
     }
 
-    async startNewGame() {
-        const response = await fetch('/api/new-game');
-        const data = await response.json();
-        this.words = data.words;
+    startNewGame() {
+        this.words = this.INITIAL_GROUPS.flatMap(group => group.words);
+        this.shuffle();
         this.renderGrid();
     }
 
@@ -78,37 +100,37 @@ class ConnectionsGame {
         this.renderGrid();
     }
 
-    async submitSelection() {
-        const response = await fetch('/api/validate', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                words: Array.from(this.selectedWords)
-            })
-        });
-        const result = await response.json();
+    validateSelection() {
+        const selectedWordsArray = Array.from(this.selectedWords);
+        return this.INITIAL_GROUPS.find(group => 
+            group.words.every(word => selectedWordsArray.includes(word))
+        );
+    }
 
-        if (result.correct) {
-            this.handleCorrectGuess(result);
+    submitSelection() {
+        const matchedGroup = this.validateSelection();
+
+        if (matchedGroup) {
+            this.handleCorrectGuess(matchedGroup);
         } else {
             this.handleIncorrectGuess();
         }
     }
 
-    handleCorrectGuess(result) {
+    handleCorrectGuess(matchedGroup) {
         // Add matched group to display
         const groupElement = document.createElement('div');
         groupElement.className = 'matched-group';
-        groupElement.style.backgroundColor = result.color;
+        groupElement.style.backgroundColor = matchedGroup.color;
         groupElement.innerHTML = `
             <div>${Array.from(this.selectedWords).join(' • ')}</div>
-            <div class="group-name">${result.group_name}</div>
+            <div class="group-name">${matchedGroup.description}</div>
         `;
         this.matchedGroupsContainer.appendChild(groupElement);
 
         // Remove matched words from grid
         this.words = this.words.filter(word => !this.selectedWords.has(word));
-        this.matchedGroups.add(result.group_name);
+        this.matchedGroups.add(matchedGroup.description);
         this.deselectAll();
         this.renderGrid();
 
