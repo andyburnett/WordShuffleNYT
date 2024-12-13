@@ -147,8 +147,20 @@ class ConnectionsGame {
         this.deselectAll();
 
         if (this.mistakes >= this.maxMistakes) {
-            alert('Game Over! You\'ve made too many mistakes.');
-            this.startNewGame();
+            this.INITIAL_GROUPS.forEach(group => {
+                const groupElement = document.createElement('div');
+                groupElement.className = 'matched-group';
+                groupElement.style.backgroundColor = group.color;
+                groupElement.innerHTML = `
+                    <div>${group.words.join(' • ')}</div>
+                    <div class="group-name">${group.description}</div>
+                `;
+                this.matchedGroupsContainer.appendChild(groupElement);
+            });
+            this.grid.innerHTML = '';
+            this.submitBtn.disabled = true;
+            this.shuffleBtn.disabled = true;
+            this.deselectAllBtn.disabled = true;
         }
     }
 
