@@ -147,17 +147,29 @@ class ConnectionsGame {
         this.deselectAll();
 
         if (this.mistakes >= this.maxMistakes) {
-            this.INITIAL_GROUPS.forEach(group => {
-                const groupElement = document.createElement('div');
-                groupElement.className = 'matched-group';
-                groupElement.style.backgroundColor = group.color;
-                groupElement.innerHTML = `
-                    <div>${group.words.join(' • ')}</div>
-                    <div class="group-name">${group.description}</div>
-                `;
-                this.matchedGroupsContainer.appendChild(groupElement);
+            // Fade out tiles
+            document.querySelectorAll('.word-tile').forEach(tile => {
+                tile.classList.add('fade-out');
             });
-            this.grid.innerHTML = '';
+
+            // Reveal answers with staggered animation
+            setTimeout(() => {
+                this.grid.innerHTML = '';
+                this.INITIAL_GROUPS.forEach((group, index) => {
+                    const groupElement = document.createElement('div');
+                    groupElement.className = 'matched-group';
+                    groupElement.style.backgroundColor = group.color;
+                    groupElement.innerHTML = `
+                        <div>${group.words.join(' • ')}</div>
+                        <div class="group-name">${group.description}</div>
+                    `;
+                    this.matchedGroupsContainer.appendChild(groupElement);
+                    
+                    setTimeout(() => {
+                        groupElement.classList.add('show');
+                    }, index * 200);
+                });
+            }, 500);
             this.submitBtn.disabled = true;
             this.shuffleBtn.disabled = true;
             this.deselectAllBtn.disabled = true;
