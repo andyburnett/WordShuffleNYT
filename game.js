@@ -2,22 +2,22 @@ class ConnectionsGame {
     constructor() {
         this.INITIAL_GROUPS = [
             {
-                "words": ["Iceland", "Duo", "FIRST", "Squash"],
+                "words": ["Lime", "Miami", "Spline", "Object"],
                 "description": "Who would have thought that Duo Lingo is as addictive as crack",
                 "color": "#85C0F9"
             },
             {
-                "words": ["WORD5", "WORD6", "WORD7", "WORD8"],
+                "words": ["Pointe", "Fame", "Eiffel", "Nationals"],
                 "description": "Another descriptive sentence for this group",
                 "color": "#A6CF98"
             },
             {
-                "words": ["WORD9", "WORD10", "WORD11", "WORD12"],
+                "words": ["Infusing", "193", "Do-re-me", "Gnome"],
                 "description": "Description for the third group",
                 "color": "#F9DF6D"
             },
             {
-                "words": ["WORD13", "WORD14", "WORD15", "WORD16"],
+                "words": ["Duo", "Squash", "FIRST", "Ithaca"],
                 "description": "Description for the fourth group",
                 "color": "#FF8B94"
             }
