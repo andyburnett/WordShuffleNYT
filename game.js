@@ -52,8 +52,32 @@ class ConnectionsGame {
     }
 
     startNewGame() {
-        this.words = this.INITIAL_GROUPS.flatMap((group) => group.words);
-        this.shuffle();
+        const savedState = localStorage.getItem('gameState');
+        if (savedState) {
+            const state = JSON.parse(savedState);
+            this.words = state.words;
+            this.matchedGroups = new Set(state.matchedGroups);
+            this.mistakes = state.mistakes;
+            
+            // Restore matched groups display
+            state.matchedGroups.forEach(page => {
+                const group = this.INITIAL_GROUPS.find(g => g.page === page);
+                if (group) {
+                    const groupElement = document.createElement("div");
+                    groupElement.className = "matched-group show";
+                    groupElement.style.backgroundColor = group.color;
+                    groupElement.innerHTML = `
+                        <div>${group.words.join(" • ")}</div>
+                        <div class="group-name">${group.description}</div>
+                    `;
+                    this.matchedGroupsContainer.appendChild(groupElement);
+                }
+            });
+        } else {
+            this.words = this.INITIAL_GROUPS.flatMap((group) => group.words);
+            this.shuffle();
+        }
+        this.updateMistakeDots();
         this.renderGrid();
     }
 
@@ -144,8 +168,18 @@ class ConnectionsGame {
         this.deselectAll();
         this.renderGrid();
 
+        // Save game state
+        localStorage.setItem('gameState', JSON.stringify({
+            words: this.words,
+            matchedGroups: Array.from(this.matchedGroups),
+            mistakes: this.mistakes
+        }));
+
         if (this.matchedGroups.size === 4) {
-            setTimeout(() => alert("Congratulations! You won!"), 500);
+            setTimeout(() => {
+                alert("Congratulations! You won!");
+                localStorage.removeItem('gameState');
+            }, 500);
         }
     }
 
