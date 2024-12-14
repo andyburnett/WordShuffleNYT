@@ -23,7 +23,7 @@ class ConnectionsGame {
                 page: "pages/cyndi.html",
             },
             {
-                words: ["Duo", "Squash", "FIRST", "Ithaca"],
+                words: ["Duo", "Squash", "On-The-Lake", "Ithaca"],
                 description:
                     'Click <a href="pages/andy.html">here</a> to see Andy\'s year in pictures',
                 color: "#FF8B94",
