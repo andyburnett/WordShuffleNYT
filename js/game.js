@@ -63,7 +63,7 @@ class ConnectionsGame {
             this.matchedGroups = new Set(state.matchedGroups);
             this.mistakes = state.mistakes;
 
-            // Restore matched groups display
+            // Restore matched groups displa y
             state.matchedGroups.forEach((page) => {
                 const group = this.INITIAL_GROUPS.find((g) => g.page === page);
                 if (group) {
