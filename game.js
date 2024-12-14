@@ -3,27 +3,31 @@ class ConnectionsGame {
         this.INITIAL_GROUPS = [
             {
                 words: ["Lime", "Miami", "Spline", "Object"],
-                description: 'Click <a href="james.html">here</a> to see James\'s year in pictures',
+                description:
+                    'Click <a href="james.html">here</a> to see James\'s year in pictures',
                 color: "#85C0F9",
-                page: "james.html"
+                page: "james.html",
             },
             {
                 words: ["Pointe", "Fame", "Eiffel", "Nationals"],
-                description: 'Click <a href="cyndi.html">here</a> to see Cyndi\'s year in pictures',
+                description:
+                    'Click <a href="emily.html">here</a> to see Emily\'s year in pictures',
                 color: "#A6CF98",
-                page: "cyndi.html"
+                page: "emily.html",
             },
             {
                 words: ["Infusing", "193", "Do-re-me", "Gnome"],
-                description: 'Click <a href="emily.html">here</a> to see Emily\'s year in pictures',
+                description:
+                    'Click <a href="cyndi.html">here</a> to see Cyndi\'s year in pictures',
                 color: "#F9DF6D",
-                page: "emily.html"
+                page: "cyndi.html",
             },
             {
                 words: ["Duo", "Squash", "FIRST", "Ithaca"],
-                description: 'Click <a href="andy.html">here</a> to see Andy\'s year in pictures',
+                description:
+                    'Click <a href="andy.html">here</a> to see Andy\'s year in pictures',
                 color: "#FF8B94",
-                page: "andy.html"
+                page: "andy.html",
             },
         ];
 
@@ -52,16 +56,16 @@ class ConnectionsGame {
     }
 
     startNewGame() {
-        const savedState = localStorage.getItem('gameState');
+        const savedState = localStorage.getItem("gameState");
         if (savedState) {
             const state = JSON.parse(savedState);
             this.words = state.words;
             this.matchedGroups = new Set(state.matchedGroups);
             this.mistakes = state.mistakes;
-            
+
             // Restore matched groups display
-            state.matchedGroups.forEach(page => {
-                const group = this.INITIAL_GROUPS.find(g => g.page === page);
+            state.matchedGroups.forEach((page) => {
+                const group = this.INITIAL_GROUPS.find((g) => g.page === page);
                 if (group) {
                     const groupElement = document.createElement("div");
                     groupElement.className = "matched-group show";
@@ -160,7 +164,7 @@ class ConnectionsGame {
             <div class="group-name">${matchedGroup.description}</div>
         `;
         this.matchedGroupsContainer.appendChild(groupElement);
-        setTimeout(() => groupElement.classList.add('show'), 50);
+        setTimeout(() => groupElement.classList.add("show"), 50);
 
         // Remove matched words from grid
         this.words = this.words.filter((word) => !this.selectedWords.has(word));
@@ -169,16 +173,19 @@ class ConnectionsGame {
         this.renderGrid();
 
         // Save game state
-        localStorage.setItem('gameState', JSON.stringify({
-            words: this.words,
-            matchedGroups: Array.from(this.matchedGroups),
-            mistakes: this.mistakes
-        }));
+        localStorage.setItem(
+            "gameState",
+            JSON.stringify({
+                words: this.words,
+                matchedGroups: Array.from(this.matchedGroups),
+                mistakes: this.mistakes,
+            }),
+        );
 
         if (this.matchedGroups.size === 4) {
             setTimeout(() => {
                 alert("Congratulations! You won!");
-                localStorage.removeItem('gameState');
+                localStorage.removeItem("gameState");
             }, 500);
         }
     }
