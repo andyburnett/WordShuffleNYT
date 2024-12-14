@@ -136,10 +136,11 @@ class ConnectionsGame {
             <div class="group-name">${matchedGroup.description}</div>
         `;
         this.matchedGroupsContainer.appendChild(groupElement);
+        setTimeout(() => groupElement.classList.add('show'), 50);
 
         // Remove matched words from grid
         this.words = this.words.filter((word) => !this.selectedWords.has(word));
-        this.matchedGroups.add(matchedGroup.name);
+        this.matchedGroups.add(matchedGroup.page);
         this.deselectAll();
         this.renderGrid();
 
