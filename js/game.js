@@ -4,30 +4,30 @@ class ConnectionsGame {
             {
                 words: ["Lime", "Miami", "Spline", "Object"],
                 description:
-                    'Click <a href="james.html">here</a> to see James\'s year in pictures',
+                    'Click <a href="pages/james.html">here</a> to see James\'s year in pictures',
                 color: "#85C0F9",
-                page: "james.html",
+                page: "pages/james.html",
             },
             {
                 words: ["Pointe", "Fame", "Eiffel", "Nationals"],
                 description:
-                    'Click <a href="emily.html">here</a> to see Emily\'s year in pictures',
+                    'Click <a href="pages/emily.html">here</a> to see Emily\'s year in pictures',
                 color: "#A6CF98",
-                page: "emily.html",
+                page: "pages/emily.html",
             },
             {
                 words: ["Infusing", "193", "Do-re-me", "Gnome"],
                 description:
-                    'Click <a href="cyndi.html">here</a> to see Cyndi\'s year in pictures',
+                    'Click <a href="pages/cyndi.html">here</a> to see Cyndi\'s year in pictures',
                 color: "#F9DF6D",
-                page: "cyndi.html",
+                page: "pages/cyndi.html",
             },
             {
                 words: ["Duo", "Squash", "FIRST", "Ithaca"],
                 description:
-                    'Click <a href="andy.html">here</a> to see Andy\'s year in pictures',
+                    'Click <a href="pages/andy.html">here</a> to see Andy\'s year in pictures',
                 color: "#FF8B94",
-                page: "andy.html",
+                page: "pages/andy.html",
             },
         ];
 
