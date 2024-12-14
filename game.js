@@ -3,24 +3,27 @@ class ConnectionsGame {
         this.INITIAL_GROUPS = [
             {
                 words: ["Lime", "Miami", "Spline", "Object"],
-                description:
-                    "Who would have thought that Duo Lingo is as addictive as crack",
+                description: 'Click <a href="james.html">here</a> to see James\'s year in pictures',
                 color: "#85C0F9",
+                page: "james.html"
             },
             {
                 words: ["Pointe", "Fame", "Eiffel", "Nationals"],
-                description: "Another descriptive sentence for this group",
+                description: 'Click <a href="cyndi.html">here</a> to see Cyndi\'s year in pictures',
                 color: "#A6CF98",
+                page: "cyndi.html"
             },
             {
                 words: ["Infusing", "193", "Do-re-me", "Gnome"],
-                description: "Description for the third group",
+                description: 'Click <a href="emily.html">here</a> to see Emily\'s year in pictures',
                 color: "#F9DF6D",
+                page: "emily.html"
             },
             {
                 words: ["Duo", "Squash", "FIRST", "Ithaca"],
-                description: "Description for the fourth group",
+                description: 'Click <a href="andy.html">here</a> to see Andy\'s year in pictures',
                 color: "#FF8B94",
+                page: "andy.html"
             },
         ];
 
