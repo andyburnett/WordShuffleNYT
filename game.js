@@ -2,64 +2,67 @@ class ConnectionsGame {
     constructor() {
         this.INITIAL_GROUPS = [
             {
-                "words": ["Lime", "Miami", "Spline", "Object"],
-                "description": "Who would have thought that Duo Lingo is as addictive as crack",
-                "color": "#85C0F9"
+                words: ["Lime", "Miami", "Spline", "Object"],
+                description:
+                    "Who would have thought that Duo Lingo is as addictive as crack",
+                color: "#85C0F9",
             },
             {
-                "words": ["Pointe", "Fame", "Eiffel", "Nationals"],
-                "description": "Another descriptive sentence for this group",
-                "color": "#A6CF98"
+                words: ["Pointe", "Fame", "Eiffel", "Nationals"],
+                description: "Another descriptive sentence for this group",
+                color: "#A6CF98",
             },
             {
-                "words": ["Infusing", "193", "Do-re-me", "Gnome"],
-                "description": "Description for the third group",
-                "color": "#F9DF6D"
+                words: ["Infusing", "193", "Do-re-me", "Gnome"],
+                description: "Description for the third group",
+                color: "#F9DF6D",
             },
             {
-                "words": ["Duo", "Squash", "FIRST", "Ithaca"],
-                "description": "Description for the fourth group",
-                "color": "#FF8B94"
-            }
+                words: ["Duo", "Squash", "FIRST", "Ithaca"],
+                description: "Description for the fourth group",
+                color: "#FF8B94",
+            },
         ];
 
         this.selectedWords = new Set();
         this.matchedGroups = new Set();
         this.mistakes = 0;
         this.maxMistakes = 4;
-        
+
         this.initializeElements();
         this.initializeEventListeners();
         this.startNewGame();
     }
 
     initializeElements() {
-        this.grid = document.getElementById('game-grid');
-        this.submitBtn = document.getElementById('submit');
-        this.deselectAllBtn = document.getElementById('deselect-all');
-        this.shuffleBtn = document.getElementById('shuffle');
-        this.matchedGroupsContainer = document.getElementById('matched-groups');
+        this.grid = document.getElementById("game-grid");
+        this.submitBtn = document.getElementById("submit");
+        this.deselectAllBtn = document.getElementById("deselect-all");
+        this.shuffleBtn = document.getElementById("shuffle");
+        this.matchedGroupsContainer = document.getElementById("matched-groups");
     }
 
     initializeEventListeners() {
-        this.submitBtn.addEventListener('click', () => this.submitSelection());
-        this.deselectAllBtn.addEventListener('click', () => this.deselectAll());
-        this.shuffleBtn.addEventListener('click', () => this.shuffle());
+        this.submitBtn.addEventListener("click", () => this.submitSelection());
+        this.deselectAllBtn.addEventListener("click", () => this.deselectAll());
+        this.shuffleBtn.addEventListener("click", () => this.shuffle());
     }
 
     startNewGame() {
-        this.words = this.INITIAL_GROUPS.flatMap(group => group.words);
+        this.words = this.INITIAL_GROUPS.flatMap((group) => group.words);
         this.shuffle();
         this.renderGrid();
     }
 
     renderGrid() {
-        this.grid.innerHTML = '';
-        this.words.forEach(word => {
-            const tile = document.createElement('button');
-            tile.className = 'word-tile';
+        this.grid.innerHTML = "";
+        this.words.forEach((word) => {
+            const tile = document.createElement("button");
+            tile.className = "word-tile";
             tile.textContent = word;
-            tile.addEventListener('click', () => this.toggleWordSelection(tile, word));
+            tile.addEventListener("click", () =>
+                this.toggleWordSelection(tile, word),
+            );
             this.grid.appendChild(tile);
         });
     }
@@ -67,10 +70,10 @@ class ConnectionsGame {
     toggleWordSelection(tile, word) {
         if (this.selectedWords.has(word)) {
             this.selectedWords.delete(word);
-            tile.classList.remove('selected');
+            tile.classList.remove("selected");
         } else if (this.selectedWords.size < 4) {
             this.selectedWords.add(word);
-            tile.classList.add('selected');
+            tile.classList.add("selected");
         }
 
         this.updateButtonStates();
@@ -83,8 +86,8 @@ class ConnectionsGame {
 
     deselectAll() {
         this.selectedWords.clear();
-        document.querySelectorAll('.word-tile.selected').forEach(tile => {
-            tile.classList.remove('selected');
+        document.querySelectorAll(".word-tile.selected").forEach((tile) => {
+            tile.classList.remove("selected");
         });
         this.updateButtonStates();
     }
@@ -93,7 +96,10 @@ class ConnectionsGame {
         const currentWords = [...this.words];
         for (let i = currentWords.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
-            [currentWords[i], currentWords[j]] = [currentWords[j], currentWords[i]];
+            [currentWords[i], currentWords[j]] = [
+                currentWords[j],
+                currentWords[i],
+            ];
         }
         this.words = currentWords;
         this.deselectAll();
@@ -102,8 +108,8 @@ class ConnectionsGame {
 
     validateSelection() {
         const selectedWordsArray = Array.from(this.selectedWords);
-        return this.INITIAL_GROUPS.find(group => 
-            group.words.every(word => selectedWordsArray.includes(word))
+        return this.INITIAL_GROUPS.find((group) =>
+            group.words.every((word) => selectedWordsArray.includes(word)),
         );
     }
 
@@ -119,54 +125,54 @@ class ConnectionsGame {
 
     handleCorrectGuess(matchedGroup) {
         // Add matched group to display
-        const groupElement = document.createElement('div');
-        groupElement.className = 'matched-group';
+        const groupElement = document.createElement("div");
+        groupElement.className = "matched-group";
         groupElement.style.backgroundColor = matchedGroup.color;
         groupElement.innerHTML = `
-            <div>${Array.from(this.selectedWords).join(' • ')}</div>
+            <div>${Array.from(this.selectedWords).join(" • ")}</div>
             <div class="group-name">${matchedGroup.description}</div>
         `;
         this.matchedGroupsContainer.appendChild(groupElement);
 
         // Remove matched words from grid
-        this.words = this.words.filter(word => !this.selectedWords.has(word));
+        this.words = this.words.filter((word) => !this.selectedWords.has(word));
         this.matchedGroups.add(matchedGroup.name);
         this.deselectAll();
         this.renderGrid();
 
         if (this.matchedGroups.size === 4) {
-            setTimeout(() => alert('Congratulations! You won!'), 500);
+            setTimeout(() => alert("Congratulations! You won!"), 500);
         }
     }
 
     handleIncorrectGuess() {
         this.mistakes++;
         this.updateMistakeDots();
-        this.grid.classList.add('shake');
-        setTimeout(() => this.grid.classList.remove('shake'), 500);
+        this.grid.classList.add("shake");
+        setTimeout(() => this.grid.classList.remove("shake"), 500);
         this.deselectAll();
 
         if (this.mistakes >= this.maxMistakes) {
             // Fade out tiles
-            document.querySelectorAll('.word-tile').forEach(tile => {
-                tile.classList.add('fade-out');
+            document.querySelectorAll(".word-tile").forEach((tile) => {
+                tile.classList.add("fade-out");
             });
 
-            // Reveal answers with staggered animation
+            // Reveal answers with staggered animation. Very nice!
             setTimeout(() => {
-                this.grid.innerHTML = '';
+                this.grid.innerHTML = "";
                 this.INITIAL_GROUPS.forEach((group, index) => {
-                    const groupElement = document.createElement('div');
-                    groupElement.className = 'matched-group';
+                    const groupElement = document.createElement("div");
+                    groupElement.className = "matched-group";
                     groupElement.style.backgroundColor = group.color;
                     groupElement.innerHTML = `
-                        <div>${group.words.join(' • ')}</div>
+                        <div>${group.words.join(" • ")}</div>
                         <div class="group-name">${group.description}</div>
                     `;
                     this.matchedGroupsContainer.appendChild(groupElement);
-                    
+
                     setTimeout(() => {
-                        groupElement.classList.add('show');
+                        groupElement.classList.add("show");
                     }, index * 200);
                 });
             }, 500);
@@ -177,13 +183,13 @@ class ConnectionsGame {
     }
 
     updateMistakeDots() {
-        const dots = document.querySelectorAll('.dot');
+        const dots = document.querySelectorAll(".dot");
         dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index >= this.mistakes);
+            dot.classList.toggle("active", index >= this.mistakes);
         });
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
     new ConnectionsGame();
 });
