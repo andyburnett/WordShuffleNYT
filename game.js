@@ -203,7 +203,7 @@ class ConnectionsGame {
                 tile.classList.add("fade-out");
             });
 
-            // Reveal answers with staggered animation. Very nice!
+            // Reveal answers with staggered animation.
             setTimeout(() => {
                 this.grid.innerHTML = "";
                 this.INITIAL_GROUPS.forEach((group, index) => {
