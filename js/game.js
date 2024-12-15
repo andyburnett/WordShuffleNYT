@@ -16,7 +16,7 @@ class ConnectionsGame {
                 page: "pages/emily.html",
             },
             {
-                words: ["Infusing", "193", "Do-re-me", "Gnome"],
+                words: ["Infusing", "193", "Do-re-mi", "Gnome"],
                 description:
                     'Click <a href="pages/cyndi.html">here</a> to see Cyndi\'s year in pictures',
                 color: "#F9DF6D",
