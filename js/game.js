@@ -16,14 +16,14 @@ class ConnectionsGame {
                 page: "pages/emily.html",
             },
             {
-                words: ["Infusing", "193", "Do-re-mi", "Gnome"],
+                words: ["Infusing", "193", "Do-Re-Mi", "Gnome"],
                 description:
                     'Click <a href="pages/cyndi.html">here</a> to see Cyndi\'s year in pictures',
                 color: "#F9DF6D",
                 page: "pages/cyndi.html",
             },
             {
-                words: ["Duo", "Sondheim", "On-The-Lake", "Ithaca"],
+                words: ["Duo", "Sondheim", "On-the-Lake", "Ithaca"],
                 description:
                     'Click <a href="pages/andy.html">here</a> to see Andy\'s year in pictures',
                 color: "#FF8B94",
